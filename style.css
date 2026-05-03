@@ -579,10 +579,10 @@ a:hover {
   }
 
   /* cuando está activo */
-  .site-nav.active {
-    display: block;
-  }
-
+  .site-nav.open {
+  display: block;
+}
+   
   .site-nav ul {
     flex-direction: column;
     padding: 1rem;
