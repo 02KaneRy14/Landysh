@@ -227,7 +227,7 @@
             <ul>
               <li><strong>Horario:</strong> Lun–Dom 7:00 – 20:00</li>
               <li><strong>Teléfono:</strong> +503 6163-9466</li>
-              <li><strong>Dirección:</strong> calle el </li>
+              <li><strong>Dirección:</strong> calle palestina </li>
             </ul>
           </aside>
         </div>
@@ -251,7 +251,13 @@
 
           <label for="telefono">Teléfono (opcional)</label>
           <input id="telefono" name="telefono" type="tel" placeholder="+503 6163-9466" pattern="^\+?[0-9\s\-]{7,15}$" />
-
+          <label for="tipo">Tipo de consulta</label>
+<select id="tipo" name="tipo" required>
+  <option value="Duda">Duda</option>
+  <option value="Pedido">Consulta de pedido</option>
+  <option value="Error">Reportar error</option>
+  <option value="Otro">Otro</option>
+</select>
           <label for="mensaje">Mensaje</label>
           <textarea id="mensaje" name="mensaje" required minlength="10" placeholder="Escribe tu consulta o pedido" aria-required="true"></textarea>
 
@@ -304,5 +310,28 @@
        - script.js debe gestionar: búsqueda, carrito, formulario y accesibilidad.
        =========================== -->
   <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+emailjs.init("wGysjER1RCSqjRTtS");
+
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_5d488st",
+    "template_d92mojc",
+    this
+  )
+  .then(function(){
+    alert("✅ Mensaje enviado correctamente");
+    document.getElementById("contactForm").reset();
+  }, function(error){
+    alert("❌ Error al enviar el mensaje");
+    console.log(error);
+  });
+
+});
+</script>
 </body>
 </html>
