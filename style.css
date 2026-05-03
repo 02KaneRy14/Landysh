@@ -448,6 +448,13 @@ a:hover {
   overflow-y: auto;
   transition: transform var(--transition);
   z-index: 9999;
+
+  /* 🔥 FIX */
+  transform: translateX(100%);
+}
+
+.cart:not([hidden]) {
+  transform: translateX(0);
 }
 
 .cart h2 {
@@ -464,7 +471,6 @@ a:hover {
   border-top: 1px solid var(--detalle2);
   padding-top: 1rem;
 }
-
 /* ============================
    FOOTER
 ============================ */
