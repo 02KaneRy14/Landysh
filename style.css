@@ -194,13 +194,14 @@ a:hover {
 ============================ */
 .hero {
   background-color: var(--fondo-terciario);
-  padding: 4rem 0; /*  quitamos el padding lateral */
+  padding: 4rem 1rem; /* agrega espacio a los lados */
   border-radius: var(--radius);
   text-align: center;
 }
 .hero-inner {
   max-width: 700px;
   margin: 0 auto;
+  text-align: center; /* por si acaso */
 }
 .hero-title {
   font-size: 2rem;
