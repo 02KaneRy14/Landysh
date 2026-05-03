@@ -219,7 +219,10 @@ a:hover {
   gap: 1rem;
   flex-wrap: wrap;
 }
-
+.hero-cta .btn {
+  display: inline-block;
+  min-width: 160px;
+}
 /* ============================
    BOTONES
 ============================ */
