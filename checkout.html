@@ -158,7 +158,10 @@
 
     // 🛒 CARRITO REAL DESDE TU SISTEMA
     let cart = JSON.parse(localStorage.getItem("landyshCart")) || [];
-
+if(cart.length === 0){
+  alert("⚠️ Tu carrito está vacío");
+  return;
+}
     let productosTexto = "";
     let total = 0;
 
