@@ -102,7 +102,9 @@ if (cartItemsEl) {
 
 // Abrir / cerrar carrito
 if (cartBtn && cartEl) {
-  cartBtn.addEventListener("click", () => {
+  cartBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
     const abierto = !cartEl.hasAttribute("hidden");
 
     if (abierto) {
