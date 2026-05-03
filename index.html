@@ -62,16 +62,46 @@
         <button type="submit" aria-label="Buscar">Buscar</button>
       </form>
 
-      <!-- ICONOS / ACCIONES -->
-      <div class="actions" aria-hidden="false">
-        <button id="mobileMenuBtn" class="icon-btn" aria-controls="siteNav" aria-expanded="false" aria-label="Abrir menú">Menu</button>
-       <button id="cartBtn" class="icon-btn" aria-label="Ver carrito de compras" aria-expanded="false">
-         <button id="clearCartBtn" class="btn btn-ghost">Vaciar carrito</button>
-  Carrito (<span id="cartCount" aria-live="polite">0</span>)
-</button>
-        <a href="./cuenta.html" id="accountBtn" class="icon-btn" aria-label="Cuenta de usuario">Mi cuenta</a>
-      </div>
-    </div>
+<!-- ICONOS / ACCIONES -->
+<div class="actions" aria-hidden="false">
+  
+  <!-- Botón menú móvil -->
+  <button 
+    id="mobileMenuBtn" 
+    class="icon-btn" 
+    aria-controls="siteNav" 
+    aria-expanded="false" 
+    aria-label="Abrir menú">
+    Menu
+  </button>
+
+  <!-- Botón carrito -->
+  <button 
+    id="cartBtn" 
+    class="icon-btn" 
+    aria-label="Ver carrito de compras" 
+    aria-expanded="false">
+    Carrito (<span id="cartCount" aria-live="polite">0</span>)
+  </button> 
+
+  <!-- Vaciar carrito -->
+  <button 
+    id="clearCartBtn" 
+    class="btn btn-ghost" 
+    aria-label="Vaciar carrito">
+    Vaciar carrito
+  </button>
+
+  <!-- Cuenta -->
+  <a 
+    href="./cuenta.html" 
+    id="accountBtn" 
+    class="icon-btn" 
+    aria-label="Cuenta de usuario">
+    Mi cuenta
+  </a>
+
+</div>
 
     <!-- NAVEGACIÓN PRINCIPAL -->
     <nav id="siteNav" class="site-nav" role="navigation" aria-label="Navegación principal">
