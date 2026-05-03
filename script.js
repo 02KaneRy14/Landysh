@@ -124,10 +124,16 @@ const siteNav = qs("#siteNav");
 
 if (mobileMenuBtn && siteNav) {
   mobileMenuBtn.addEventListener("click", () => {
-    siteNav.classList.toggle("active");
+    siteNav.classList.toggle("open");
+
+    // Accesibilidad + feedback visual
+    const isOpen = siteNav.classList.contains("open");
+    mobileMenuBtn.setAttribute("aria-expanded", isOpen);
+
+    // Cambiar texto del botón (opcional pero útil)
+    mobileMenuBtn.textContent = isOpen ? "Cerrar" : "Menu";
   });
 }
-
 // ============================
 // BÚSQUEDA
 // ============================
