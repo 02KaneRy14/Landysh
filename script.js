@@ -18,6 +18,10 @@ const cartEl = qs("#cart");
 const cartItemsEl = qs("#cartItems");
 const cartSubtotalEl = qs("#cartSubtotal");
 
+// ============================
+// CONTADOR + VACIAR CARRITO
+// ============================
+
 // Contador
 function updateCartCount() {
   const countEl = qs("#cartCount");
@@ -26,6 +30,28 @@ function updateCartCount() {
   }
 }
 
+// Botón vaciar carrito
+const clearCartBtn = qs("#clearCartBtn");
+
+if (clearCartBtn) {
+  clearCartBtn.addEventListener("click", () => {
+
+    // Si ya está vacío, no hacer nada
+    if (cart.length === 0) return;
+
+    // Confirmación
+    const confirmar = confirm("¿Seguro que quieres vaciar el carrito?");
+    if (!confirmar) return;
+
+    // Vaciar carrito
+    cart = [];
+    localStorage.removeItem("landyshCart");
+
+    // Actualizar UI
+    renderCart();
+    updateCartCount();
+  });
+}
 // Render
 function renderCart() {
   if (!cartItemsEl || !cartSubtotalEl) return;
