@@ -567,10 +567,9 @@ a:hover {
   }
 
 }
-/*  MENU HAMBURGUESA FUNCIONAL no como el daniel */
+/*  MENU HAMBURGUESA FUNCIONAL */
 @media (max-width: 768px) {
 
-  /* ocultar menú por defecto */
   .site-nav {
     display: none;
     width: 100%;
@@ -578,11 +577,11 @@ a:hover {
     border-radius: var(--radius);
   }
 
-  /* cuando está activo */
+  /* 👇 ESTE ES EL CAMBIO IMPORTANTE */
   .site-nav.open {
-  display: block;
-}
-   
+    display: block;
+  }
+
   .site-nav ul {
     flex-direction: column;
     padding: 1rem;
