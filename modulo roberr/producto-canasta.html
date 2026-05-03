@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2b2a33" />
+  <title>Canasta Básica — Landysh</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand"><h1>Landysh<span class="dot">.</span></h1></a>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="index.html#productos">Productos</a></li>
+          <li><a href="index.html#ofertas">Ofertas</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="producto-detalle container">
+    <article>
+      <div class="producto-img">
+        <img src="./productos/canasta basica.webp" alt="Canasta básica con arroz, frijoles, azúcar y aceite" width="600">
+      </div>
+      <div class="producto-info">
+        <h2>Canasta Básica</h2>
+        <p class="precio">$25.00</p>
+        <p class="descripcion">
+          Incluye los esenciales del hogar: arroz 5kg, frijoles 2kg, azúcar 2kg, aceite 1L y más productos seleccionados de primera calidad.
+        </p>
+        <ul class="detalles">
+          <li>Arroz Premium</li>
+          <li>Frijoles Negros 2kg</li>
+          <li>Azúcar Refinada</li>
+          <li>Aceite Vegetal 1L</li>
+          <li>Pasta y Harina</li>
+        </ul>
+        <div class="acciones">
+          <button class="btn btn-add-to-cart" data-product-id="p001" data-price="25.00">Agregar al carrito</button>
+          <a href="index.html#productos" class="btn btn-ghost">Volver a productos</a>
+        </div>
+      </div>
+    </article>
+
+    <section class="relacionados">
+      <h3>Productos relacionados</h3>
+      <ul>
+        <li><a href="producto-lacteos.html">Lácteos Frescos</a></li>
+        <li><a href="producto-frutas.html">Frutas y Verduras</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Landysh — Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
