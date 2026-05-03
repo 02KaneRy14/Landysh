@@ -96,30 +96,34 @@ cartItemsEl.addEventListener("click", (e) => {
 });
 
 // Mostrar / ocultar carrito
-cartBtn.addEventListener("click", () => {
-  const expanded = !cartEl.hasAttribute("hidden");
-  if (expanded) {
-    cartEl.setAttribute("hidden", "");
-    cartBtn.setAttribute("aria-expanded", "false");
-  } else {
-    cartEl.removeAttribute("hidden");
-    cartBtn.setAttribute("aria-expanded", "true");
-    renderCart();
-  }
-});
+if (cartBtn && cartEl) {
+  cartBtn.addEventListener("click", () => {
+    const isOpen = !cartEl.hasAttribute("hidden");
 
+    if (isOpen) {
+      cartEl.setAttribute("hidden", "");
+      cartBtn.setAttribute("aria-expanded", "false");
+    } else {
+      cartEl.removeAttribute("hidden");
+      cartBtn.setAttribute("aria-expanded", "true");
+      renderCart();
+    }
+  });
+}
 // ============================
 // MENÚ RESPONSIVO
 // ============================
 const mobileMenuBtn = qs("#mobileMenuBtn");
 const siteNav = qs("#siteNav");
 
-mobileMenuBtn.addEventListener("click", () => {
-  const expanded = siteNav.getAttribute("aria-expanded") === "true";
-  siteNav.setAttribute("aria-expanded", !expanded);
-  siteNav.classList.toggle("open");
-});
+if (mobileMenuBtn && siteNav) {
+  mobileMenuBtn.addEventListener("click", () => {
+    const expanded = siteNav.classList.contains("active");
 
+    siteNav.classList.toggle("active");
+    mobileMenuBtn.setAttribute("aria-expanded", !expanded);
+  });
+}
 // ============================
 // BÚSQUEDA DE PRODUCTOS
 // ============================
@@ -146,7 +150,7 @@ searchForm.addEventListener("submit", (e) => {
 const contactForm = qs("#contactForm");
 const formFeedback = qs("#formFeedback");
 
-contactForm.addEventListener("submit", (e) => {
+if (contactForm) {   contactForm.addEventListener("submit", (e) => {     e.preventDefault();      const nombre = qs("#nombre").value.trim();     const email = qs("#email").value.trim();     const mensaje = qs("#mensaje").value.trim();      if (nombre.length < 3) {       showFeedback("Nombre demasiado corto.");       return;     }     if (!validateEmail(email)) {       showFeedback("Correo electrónico inválido.");       return;     }     if (mensaje.length < 10) {       showFeedback("Mensaje demasiado corto.");       return;     }      showFeedback("Mensaje enviado correctamente!", true);     contactForm.reset();   }); }
   e.preventDefault();
 
   const nombre = qs("#nombre").value.trim();
