@@ -1,7 +1,7 @@
 /* ====================================
    LANDYSH — script.js
 ==================================== */
-
+//daniel hdp porque nos avandonaste 😭//
 // ============================
 // UTILIDADES
 // ============================
@@ -117,7 +117,21 @@ if (cartBtn && cartEl) {
     }
   });
 }
+// Cerrar carrito al hacer click fuera
+document.addEventListener("pointerdown", (e) => {
+  if (!cartEl || !cartBtn) return;
 
+  // Si el carrito está cerrado, no hacemos nada
+  if (cartEl.hasAttribute("hidden")) return;
+
+  const clickDentroCarrito = cartEl.contains(e.target);
+  const clickEnBoton = cartBtn.contains(e.target);
+
+  if (!clickDentroCarrito && !clickEnBoton) {
+    cartEl.setAttribute("hidden", "");
+    cartBtn.setAttribute("aria-expanded", "false");
+  }
+});
 // ============================
 // MENÚ HAMBURGUESA
 // ============================
