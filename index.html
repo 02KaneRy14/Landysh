@@ -341,20 +341,6 @@
        - script.js debe gestionar: búsqueda, carrito, formulario y accesibilidad.
        =========================== -->
   <script src="script.js" defer></script>
-  <script>
-const menuBtn = document.getElementById("mobileMenuBtn");
-const nav = document.getElementById("siteNav");
-
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("open");
-
-  if(nav.classList.contains("active")){
-    menuBtn.textContent = "Cerrar";
-  } else {
-    menuBtn.textContent = "Menu";
-  }
-});
-</script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
