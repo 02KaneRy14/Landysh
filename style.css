@@ -216,12 +216,14 @@ a:hover {
 .hero-cta {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
+
 .hero-cta .btn {
-  display: inline-block;
-  min-width: 160px;
+  flex: 1 1 180px;
+  max-width: 220px;
 }
 /* ============================
    BOTONES
