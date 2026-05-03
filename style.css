@@ -224,13 +224,13 @@ a:hover {
    BOTONES
 ============================ */
 .btn {
-  white-space: nowrap;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius);
   font-weight: 500;
   cursor: pointer;
   border: none;
   transition: all var(--transition);
+  text-align: center;
 }
 
 .btn-primary {
