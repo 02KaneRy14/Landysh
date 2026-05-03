@@ -1,16 +1,15 @@
 /* ====================================
    LANDYSH — script.js
-   Funciones: carrito, búsqueda, formulario, accesibilidad
 ==================================== */
 
 // ============================
-// UTILIDADES GENERALES
+// UTILIDADES
 // ============================
 const qs = (selector) => document.querySelector(selector);
 const qsa = (selector) => document.querySelectorAll(selector);
 
 // ============================
-// CARRO DE COMPRAS
+// CARRITO
 // ============================
 let cart = JSON.parse(localStorage.getItem("landyshCart")) || [];
 
@@ -18,15 +17,19 @@ const cartBtn = qs("#cartBtn");
 const cartEl = qs("#cart");
 const cartItemsEl = qs("#cartItems");
 const cartSubtotalEl = qs("#cartSubtotal");
-const checkoutBtn = qs("#checkoutBtn");
 
-// Contador de productos en el carrito
+// Contador
 function updateCartCount() {
-  qs("#cartCount").textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const countEl = qs("#cartCount");
+  if (countEl) {
+    countEl.textContent = cart.reduce((acc, item) => acc + item.quantity, 0);
+  }
 }
 
-// Renderizar el carrito
+// Render
 function renderCart() {
+  if (!cartItemsEl || !cartSubtotalEl) return;
+
   cartItemsEl.innerHTML = "";
   let subtotal = 0;
 
@@ -41,12 +44,11 @@ function renderCart() {
     subtotal += item.price * item.quantity;
 
     const li = document.createElement("li");
-    li.className = "cart-item";
     li.innerHTML = `
-      <span class="cart-item-name">${item.name}</span>
-      <span class="cart-item-qty">x${item.quantity}</span>
-      <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
-      <button class="btn btn-ghost btn-remove" data-id="${item.id}" aria-label="Eliminar ${item.name}">X</button>
+      <span>${item.name}</span>
+      <span>x${item.quantity}</span>
+      <span>$${(item.price * item.quantity).toFixed(2)}</span>
+      <button class="btn-remove" data-id="${item.id}">X</button>
     `;
     cartItemsEl.appendChild(li);
   });
@@ -55,13 +57,16 @@ function renderCart() {
   updateCartCount();
 }
 
-// Agregar producto al carrito
+// Agregar
 function addToCart(productId) {
   const productCard = qs(`.producto-card[data-id="${productId}"]`);
+  if (!productCard) return;
+
   const name = productCard.querySelector(".producto-nombre").textContent;
   const price = parseFloat(productCard.dataset.price);
 
-  const existing = cart.find((p) => p.id === productId);
+  const existing = cart.find(p => p.id === productId);
+
   if (existing) {
     existing.quantity++;
   } else {
@@ -72,35 +77,35 @@ function addToCart(productId) {
   renderCart();
 }
 
-// Eliminar producto del carrito
+// Eliminar
 function removeFromCart(productId) {
-  cart = cart.filter((p) => p.id !== productId);
+  cart = cart.filter(p => p.id !== productId);
   localStorage.setItem("landyshCart", JSON.stringify(cart));
   renderCart();
 }
 
-// Evento botones "Agregar al carrito"
-qsa("[data-add-to-cart]").forEach((btn) => {
+// Botones agregar
+qsa("[data-add-to-cart]").forEach(btn => {
   btn.addEventListener("click", () => {
-    const productId = btn.dataset.productId;
-    addToCart(productId);
+    addToCart(btn.dataset.productId);
   });
 });
 
-// Evento botón eliminar
-cartItemsEl.addEventListener("click", (e) => {
-  if (e.target.classList.contains("btn-remove")) {
-    const productId = e.target.dataset.id;
-    removeFromCart(productId);
-  }
-});
+// Botón eliminar
+if (cartItemsEl) {
+  cartItemsEl.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-remove")) {
+      removeFromCart(e.target.dataset.id);
+    }
+  });
+}
 
-// Mostrar / ocultar carrito
+// Abrir / cerrar carrito
 if (cartBtn && cartEl) {
   cartBtn.addEventListener("click", () => {
-    const isOpen = !cartEl.hasAttribute("hidden");
+    const abierto = !cartEl.hasAttribute("hidden");
 
-    if (isOpen) {
+    if (abierto) {
       cartEl.setAttribute("hidden", "");
       cartBtn.setAttribute("aria-expanded", "false");
     } else {
@@ -110,96 +115,97 @@ if (cartBtn && cartEl) {
     }
   });
 }
+
 // ============================
-// MENÚ RESPONSIVO
+// MENÚ HAMBURGUESA
 // ============================
 const mobileMenuBtn = qs("#mobileMenuBtn");
 const siteNav = qs("#siteNav");
 
 if (mobileMenuBtn && siteNav) {
   mobileMenuBtn.addEventListener("click", () => {
-    const expanded = siteNav.classList.contains("active");
-
     siteNav.classList.toggle("active");
-    mobileMenuBtn.setAttribute("aria-expanded", !expanded);
   });
 }
+
 // ============================
-// BÚSQUEDA DE PRODUCTOS
+// BÚSQUEDA
 // ============================
 const searchForm = qs("#searchForm");
 const searchInput = qs("#searchInput");
 
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const query = searchInput.value.toLowerCase();
-  qsa(".producto-card").forEach((card) => {
-    const name = card.querySelector(".producto-nombre").textContent.toLowerCase();
-    const desc = card.querySelector(".producto-desc").textContent.toLowerCase();
-    if (name.includes(query) || desc.includes(query)) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
+if (searchForm && searchInput) {
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const query = searchInput.value.toLowerCase();
+
+    qsa(".producto-card").forEach(card => {
+      const name = card.querySelector(".producto-nombre").textContent.toLowerCase();
+      const desc = card.querySelector(".producto-desc").textContent.toLowerCase();
+
+      card.style.display =
+        name.includes(query) || desc.includes(query)
+          ? ""
+          : "none";
+    });
   });
-});
+}
 
 // ============================
-// FORMULARIO DE CONTACTO
+// FORMULARIO
 // ============================
 const contactForm = qs("#contactForm");
 const formFeedback = qs("#formFeedback");
 
-if (contactForm) {   contactForm.addEventListener("submit", (e) => {     e.preventDefault();      const nombre = qs("#nombre").value.trim();     const email = qs("#email").value.trim();     const mensaje = qs("#mensaje").value.trim();      if (nombre.length < 3) {       showFeedback("Nombre demasiado corto.");       return;     }     if (!validateEmail(email)) {       showFeedback("Correo electrónico inválido.");       return;     }     if (mensaje.length < 10) {       showFeedback("Mensaje demasiado corto.");       return;     }      showFeedback("Mensaje enviado correctamente!", true);     contactForm.reset();   }); }
-  e.preventDefault();
+if (contactForm && formFeedback) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const nombre = qs("#nombre").value.trim();
-  const email = qs("#email").value.trim();
-  const mensaje = qs("#mensaje").value.trim();
+    const nombre = qs("#nombre").value.trim();
+    const email = qs("#email").value.trim();
+    const mensaje = qs("#mensaje").value.trim();
 
-  if (nombre.length < 3) {
-    showFeedback("Nombre demasiado corto.");
-    return;
-  }
-  if (!validateEmail(email)) {
-    showFeedback("Correo electrónico inválido.");
-    return;
-  }
-  if (mensaje.length < 10) {
-    showFeedback("Mensaje demasiado corto.");
-    return;
-  }
+    if (nombre.length < 3) {
+      showFeedback("Nombre demasiado corto.");
+      return;
+    }
 
-  showFeedback("Mensaje enviado correctamente!", true);
-  contactForm.reset();
-});
+    if (!validateEmail(email)) {
+      showFeedback("Correo inválido.");
+      return;
+    }
 
-// Feedback visual del formulario
+    if (mensaje.length < 10) {
+      showFeedback("Mensaje demasiado corto.");
+      return;
+    }
+
+    showFeedback("Mensaje enviado!", true);
+    contactForm.reset();
+  });
+}
+
+// Feedback
 function showFeedback(msg, success = false) {
+  if (!formFeedback) return;
+
   formFeedback.textContent = msg;
   formFeedback.hidden = false;
   formFeedback.style.color = success ? "lightgreen" : "tomato";
-  setTimeout(() => (formFeedback.hidden = true), 4000);
+
+  setTimeout(() => {
+    formFeedback.hidden = true;
+  }, 4000);
 }
 
-// Validar email
+// Email
 function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email.toLowerCase());
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 // ============================
-// ACCESIBILIDAD (SKIP LINK FOCUS)
-// ============================
-const skipLink = qs(".skip-link");
-skipLink.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    qs(skipLink.getAttribute("href")).focus();
-  }
-});
-
-// ============================
-// INICIALIZACIÓN
+// INIT
 // ============================
 document.addEventListener("DOMContentLoaded", () => {
   renderCart();
