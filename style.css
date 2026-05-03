@@ -526,3 +526,44 @@ a:hover {
     flex-wrap: wrap;
   }
 }
+/*  FIX HEADER MÓVIL ojala funcione xd */
+@media (max-width: 768px) {
+
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .search {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .icon-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .site-nav {
+    margin-top: 0.5rem;
+  }
+
+  .site-nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+}
